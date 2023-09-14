@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Replacement</title>
+  <style>
+    /* Basic styling for the popup */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+
+    /* Style for the "OK" button */
+    #popup button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="popup">
+  <h3>Email Replacement</h3>
+  <p>Please Enter your Username:</p>
+  <input type="text" id="usernameInput">
+  <p>Please Enter your Email:</p>
+  <input type="email" id="emailInput">
+  <br>
+  <button id="submitButton">Submit</button>
+</div>
+
+<script>
+function getEmail() {
+  var popup = document.getElementById("popup");
+  var usernameInput = document.getElementById("usernameInput");
+  var emailInput = document.getElementById("emailInput");
+  var submitButton = document.getElementById("submitButton");
+
+  submitButton.addEventListener("click", function() {
+    var username = usernameInput.value;
+    var userEmail = emailInput.value;
+    var regex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+    var replacedText = userEmail.replace(regex, "*******");
+    var message = "Hello, " + username + ". Your email is: " + replacedText;
+    alert(message);
+    popup.style.display = "none";
+  });
+
+  popup.style.display = "block";
+}
+
+getEmail();
+</script>
+
+</body>
+</html>
